@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "d5651b28e7eebdd2",
+    "type": "split",
+    "children": [
+      {
+        "id": "91b204ffff8c7289",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Use Fetch Hook.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b0e40482666bc544",
+    "type": "split",
+    "children": [
+      {
+        "id": "feb5873f267dcd15",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3e4f3b249ff6277d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "9c2876813557e472",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "05ad55f1d278dca7",
+    "type": "split",
+    "children": [
+      {
+        "id": "1b2fd15e458b7e46",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "31e3338661beba99",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Use Fetch Hook.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "91b204ffff8c7289",
+  "lastOpenFiles": [
+    "Use Fetch Hook.md"
+  ]
+}
