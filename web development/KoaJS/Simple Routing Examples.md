@@ -1,4 +1,4 @@
-## Basic Koa setup example 
+## Basic Koa setup example
 
 ```javascript
 const Koa = require("koa");
@@ -11,31 +11,24 @@ const router = new Router();
 app.use(bodyParser());
 app.use(router.routes());
 
-
 // simple midleware example
 app.use(async (ctx, next) => {
-	
-console.log(`
+  console.log(`
 		${ctx.method} 
 		${ctx.url}
 		${ctx.status}
 		${new Date().toLocaleString()}`);
 
-	await next();
+  await next();
 });
-
-  
-  
 
 // generate routes dynamically
 
 postRoutes.forEach((route) => {
-	return router[route.method](route.route, async (ctx) =>
-		route.controller[route.type](ctx)
-	);
-});
-
-  
+  return router[route.method](route.route, async (ctx) =>
+    route.controller[route.type](ctx)
+  );
+});ƒ
 
 const PORT = 4000;
 app.listen(PORT);
@@ -50,38 +43,32 @@ router.get("/posts/:id", (ctx) => post.findOne(ctx));
 router.post("/posts", (ctx) => post.create(ctx));
 router.delete("/posts/:id", (ctx) => post.delete(ctx));
 router.put("/posts/:id", (ctx) => post.update(ctx));
-  
-router.get("/comments", (ctx) => {
-	ctx.body = comments;
-});
 
-  
+router.get("/comments", (ctx) => {
+  ctx.body = comments;
+});
 
 router.get("/comments/:id", (ctx) => {
-	const { id } = ctx.params;
-	const comment = comments.find((comment) => comment.id === id);
-	ctx.body = comment;
+  const { id } = ctx.params;
+  const comment = comments.find((comment) => comment.id === id);
+  ctx.body = comment;
 });
-
-  
 
 router.get("/users", (ctx) => {
-	ctx.body = users;
+  ctx.body = users;
 });
 
-  
-
 router.get("/users/:id", (ctx) => {
-	const { id } = ctx.params;
-	const user = users.find((comment) => comment.id === id);
-	ctx.body = user;
+  const { id } = ctx.params;
+  const user = users.find((comment) => comment.id === id);
+  ctx.body = user;
 });
 ```
 
 ## Generate Koa Routing vis json file
 
-```javascript
-  
+````javascript
+
 // generate routes dynamically
 postRoutes.forEach((route) => {
 	return router[route.method](route.route, async (ctx) =>
@@ -135,10 +122,10 @@ const postRoutes = [
 	},
 ];
 
-  
+
 
 module.exports = postRoutes;
-```
+````
 
 ### Koa simple controller examples
 
@@ -146,53 +133,45 @@ module.exports = postRoutes;
 const services = require("../services/post.js");
 const uniqueId = require("uuid").v4;
 
-  
-
 module.exports = {
+  find: function (ctx) {
+    const posts = services.find();
+    ctx.body = posts;
+  },
 
-	find: function (ctx) {
-		const posts = services.find();
-		ctx.body = posts;
-	},
+  findOne: function (ctx) {
+    const { id } = ctx.params;
+    const post = services.findOne(id);
+    ctx.body = post;
+  },
 
-  
-	findOne: function (ctx) {
-		const { id } = ctx.params;
-		const post = services.findOne(id);
-		ctx.body = post;
-	},
+  create: function (ctx) {
+    const post = ctx.request.body;
+    post.id = uniqueId();
 
-  
-	create: function (ctx) {
-		const post = ctx.request.body;
-		post.id = uniqueId();
+    if (post === undefined) ctx.throw(400, "Post is undefined");
 
-		if (post === undefined) ctx.throw(400, "Post is undefined");
+    if (!post.userId) ctx.throw(400, "Invalid post: missing userId");
 
-		if (!post.userId) ctx.throw(400, "Invalid post: missing userId");
+    if (!post.title) ctx.throw(400, "Invalid post: missing title");
 
-		if (!post.title) ctx.throw(400, "Invalid post: missing title");
+    if (!post.content) ctx.throw(400, "Invalid post: missing content");
 
-		if (!post.content) ctx.throw(400, "Invalid post: missing content");
+    services.create(post);
+    ctx.body = post;
+  },
 
-		services.create(post);
-		ctx.body = post;
-	},
+  delete: function (ctx) {
+    const { id } = ctx.params;
+    const post = services.delete(id);
+    ctx.body = post;
+  },
 
-	
-	delete: function (ctx) {
-		const { id } = ctx.params;
-		const post = services.delete(id);
-		ctx.body = post;
-	},
-
-  
-	update: function (ctx) {
-		const { id } = ctx.params;
-		const post = services.update(id, ctx.request.body);
-		ctx.body = post;
-	}
-
+  update: function (ctx) {
+    const { id } = ctx.params;
+    const post = services.update(id, ctx.request.body);
+    ctx.body = post;
+  },
 };
 ```
 
@@ -200,33 +179,29 @@ module.exports = {
 
 ```javascript
 module.exports = {
+  find: function () {
+    return posts;
+  },
 
-	find: function () {
-		return posts;
-	},
+  findOne: function (id) {
+    return posts.find((post) => post.id === id);
+  },
 
-  
-	findOne: function (id) {
-		return posts.find(post => post.id === id);
-	},
+  create: function (post) {
+    return posts.push(post);
+  },
 
-  
-	create: function (post) {
-		return posts.push(post);
-	},
+  delete: function (id) {
+    posts = [...posts.filter((post) => post.id !== id)];
+    return posts;
+  },
 
-  
-	delete: function (id) {
-		posts = [...posts.filter(post => post.id !== id)];
-		return posts;
-	},
-
-
-	update: function (id, post) {
-		console.log(id, post);
-		posts = [...posts.map(item => item.id === id ? { ...item, ...post } : item)];
-	return posts;
-
-	}
+  update: function (id, post) {
+    console.log(id, post);
+    posts = [
+      ...posts.map((item) => (item.id === id ? { ...item, ...post } : item)),
+    ];
+    return posts;
+  },
 };
 ```

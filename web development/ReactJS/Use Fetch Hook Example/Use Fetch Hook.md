@@ -3,58 +3,57 @@
 ## React Fetch Data Example
 
 ```javascript
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const [status, setStatus] = useState('idle');
-const [query, setQuery] = useState('');
+const [status, setStatus] = useState("idle");
+const [query, setQuery] = useState("");
 const [data, setData] = useState([]);
 
 useEffect(() => {
-    if (!query) return;
+  if (!query) return;
 
-    const fetchData = async () => {
-        setStatus('fetching');
-        const response = await fetch(
-            `https://hn.algolia.com/api/v1/search?query=${query}`
-        );
-        const data = await response.json();
-        setData(data.hits);
-        setStatus('fetched');
-    };
+  const fetchData = async () => {
+    setStatus("fetching");
+    const response = await fetch(
+      `https://hn.algolia.com/api/v1/search?query=${query}`
+    );
+    const data = await response.json();
+    setData(data.hits);
+    setStatus("fetched");
+  };
 
-    fetchData();
+  fetchData();
 }, [query]);
 ```
-
 
 ## React Fetch Data Hook Example
 
 ```javascript
 const useFetch = (url) => {
-    const [status, setStatus] = useState('idle');
-    const [data, setData] = useState([]);
+  const [status, setStatus] = useState("idle");
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        if (!url) return;
-        const fetchData = async () => {
-            setStatus('fetching');
-            const response = await fetch(url);
-            const data = await response.json();
-            setData(data);
-            setStatus('fetched');
-        };
+  useEffect(() => {
+    if (!url) return;
+    const fetchData = async () => {
+      setStatus("fetching");
+      const response = await fetch(url);
+      const data = await response.json();
+      setData(data);
+      setStatus("fetched");
+    };
 
-        fetchData();
-    }, [url]);
+    fetchData();
+  }, [url]);
 
-    return { status, data };
+  return { status, data };
 };
 ```
 
-Example of use: 
+Example of use:
 
 ```javascript
-const [query, setQuery] = useState('');
+const [query, setQuery] = useState("");
 
 const url = query && `https://hn.algolia.com/api/v1/search?query=${query}`;
 const { status, data } = useFetch(url);
@@ -66,64 +65,63 @@ const { status, data } = useFetch(url);
 const cache = {};
 
 const useFetch = (url) => {
-    const [status, setStatus] = useState('idle');
-    const [data, setData] = useState([]);
+  const [status, setStatus] = useState("idle");
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        if (!url) return;
+  useEffect(() => {
+    if (!url) return;
 
-        const fetchData = async () => {
-            setStatus('fetching');
-            if (cache[url]) {
-                const data = cache[url];
-                setData(data);
-                setStatus('fetched');
-            } else {
-                const response = await fetch(url);
-                const data = await response.json();
-                cache[url] = data; // set response in cache;
-                setData(data);
-                setStatus('fetched');
-            }
-        };
+    const fetchData = async () => {
+      setStatus("fetching");
+      if (cache[url]) {
+        const data = cache[url];
+        setData(data);
+        setStatus("fetched");
+      } else {
+        const response = await fetch(url);
+        const data = await response.json();
+        cache[url] = data; // set response in cache;
+        setData(data);
+        setStatus("fetched");
+      }
+    };
 
-        fetchData();
-    }, [url]);
+    fetchData();
+  }, [url]);
 
-    return { status, data };
+  return { status, data };
 };
 ```
-
 
 ## React Fetch Data Hook using Ref to store cached data
 
 ```javascript
 const useFetch = (url) => {
-    const cache = useRef({});
-    const [status, setStatus] = useState('idle');
-    const [data, setData] = useState([]);
+  const cache = useRef({});
+  const [status, setStatus] = useState("idle");
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        if (!url) return;
-        const fetchData = async () => {
-            setStatus('fetching');
-            if (cache.current[url]) {
-                const data = cache.current[url];
-                setData(data);
-                setStatus('fetched');
-            } else {
-                const response = await fetch(url);
-                const data = await response.json();
-                cache.current[url] = data; // set response in cache;
-                setData(data);
-                setStatus('fetched');
-            }
-        };
+  useEffect(() => {
+    if (!url) return;
+    const fetchData = async () => {
+      setStatus("fetching");
+      if (cache.current[url]) {
+        const data = cache.current[url];
+        setData(data);
+        setStatus("fetched");
+      } else {
+        const response = await fetch(url);
+        const data = await response.json();
+        cache.current[url] = data; // set response in cache;
+        setData(data);
+        setStatus("fetched");
+      }
+    };
 
-        fetchData();
-    }, [url]);
+    fetchData();
+  }, [url]);
 
-    return { status, data };
+  return { status, data };
 };
 ```
 
@@ -131,22 +129,22 @@ const useFetch = (url) => {
 
 ```javascript
 const initialState = {
-    status: 'idle',
-    error: null,
-    data: [],
+  status: "idle",
+  error: null,
+  data: [],
 };
 
 const [state, dispatch] = useReducer((state, action) => {
-    switch (action.type) {
-        case 'FETCHING':
-            return { ...initialState, status: 'fetching' };
-        case 'FETCHED':
-            return { ...initialState, status: 'fetched', data: action.payload };
-        case 'FETCH_ERROR':
-            return { ...initialState, status: 'error', error: action.payload };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "FETCHING":
+      return { ...initialState, status: "fetching" };
+    case "FETCHED":
+      return { ...initialState, status: "fetched", data: action.payload };
+    case "FETCH_ERROR":
+      return { ...initialState, status: "error", error: action.payload };
+    default:
+      return state;
+  }
 }, initialState);
 ```
 
@@ -154,106 +152,98 @@ const [state, dispatch] = useReducer((state, action) => {
 
 ```javascript
 useEffect(() => {
-    let cancelRequest = false;
-    if (!url) return;
+  let cancelRequest = false;
+  if (!url) return;
 
-    const fetchData = async () => {
-        dispatch({ type: 'FETCHING' });
-        if (cache.current[url]) {
-            const data = cache.current[url];
-            dispatch({ type: 'FETCHED', payload: data });
-        } else {
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                cache.current[url] = data;
-                if (cancelRequest) return;
-                dispatch({ type: 'FETCHED', payload: data });
-            } catch (error) {
-                if (cancelRequest) return;
-                dispatch({ type: 'FETCH_ERROR', payload: error.message });
-            }
-        }
-    };
+  const fetchData = async () => {
+    dispatch({ type: "FETCHING" });
+    if (cache.current[url]) {
+      const data = cache.current[url];
+      dispatch({ type: "FETCHED", payload: data });
+    } else {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        cache.current[url] = data;
+        if (cancelRequest) return;
+        dispatch({ type: "FETCHED", payload: data });
+      } catch (error) {
+        if (cancelRequest) return;
+        dispatch({ type: "FETCH_ERROR", payload: error.message });
+      }
+    }
+  };
 
-    fetchData();
+  fetchData();
 
-    return function cleanup() {
-        cancelRequest = true;
-    };
+  return function cleanup() {
+    cancelRequest = true;
+  };
 }, [url]);
 ```
 
 ## Final example
 
 ```javascript
-import { useEffect, useRef, useReducer } from 'react';
+import { useEffect, useRef, useReducer } from "react";
 
 export const useFetch = (url) => {
+  const cache = useRef({});
 
-	const cache = useRef({});
+  const initialState = {
+    status: "idle",
+    error: null,
+    data: [],
+  };
 
-	const initialState = {
-		status: 'idle',
-		error: null,
-		data: [],
-	};
+  // Reducer
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "FETCHING":
+        return { ...initialState, status: "fetching" };
 
+      case "FETCHED":
+        return { ...initialState, status: "fetched", data: action.payload };
 
-	// Reducer
-	const [state, dispatch] = useReducer((state, action) => {
+      case "FETCH_ERROR":
+        return { ...initialState, status: "error", error: action.payload };
 
-		switch (action.type) {
-			case 'FETCHING':
-				return { ...initialState, status: 'fetching' };
+      default:
+        return state;
+    }
+  }, initialState);
 
-			case 'FETCHED':
-				return { ...initialState, status: 'fetched', data: action.payload };
+  useEffect(() => {
+    let cancelRequest = false;
+    if (!url || !url.trim()) return;
 
-			case 'FETCH_ERROR':
-				return { ...initialState, status: 'error', error: action.payload };
+    const fetchData = async () => {
+      dispatch({ type: "FETCHING" });
+      if (cache.current[url]) {
+        const data = cache.current[url];
+        dispatch({ type: "FETCHED", payload: data });
+      } else {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          cache.current[url] = data;
 
-			default:
-				return state;
-		}
+          if (cancelRequest) return;
+          dispatch({ type: "FETCHED", payload: data });
+        } catch (error) {
+          if (cancelRequest) return;
+          dispatch({ type: "FETCH_ERROR", payload: error.message });
+        }
+      }
+    };
 
-	}, initialState);
+    fetchData();
 
-	useEffect(() => {
-		let cancelRequest = false;
-		if (!url || !url.trim()) return;
-		
-		const fetchData = async () => {
-			dispatch({ type: 'FETCHING' });
-			if (cache.current[url]) {
-				const data = cache.current[url];
-				dispatch({ type: 'FETCHED', payload: data });
-			} else {
-				try {
-					const response = await fetch(url);
-					const data = await response.json();
-					cache.current[url] = data;
+    return function cleanup() {
+      cancelRequest = true;
+    };
+  }, [url]);
 
-					if (cancelRequest) return;
-					dispatch({ type: 'FETCHED', payload: data });
-				} catch (error) {
-					if (cancelRequest) return;
-						dispatch({ type: 'FETCH_ERROR', payload: error.message });
-					}
-				}
-
-		};
-
-		fetchData();
-
-		return function cleanup() {
-			cancelRequest = true;
-		};
-
-	}, [url]);
-
-	return state;
-
+  return state;
 };
-
 ```
