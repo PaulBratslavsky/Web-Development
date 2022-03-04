@@ -28,7 +28,8 @@ postRoutes.forEach((route) => {
   return router[route.method](route.route, async (ctx) =>
     route.controller[route.type](ctx)
   );
-});ƒ
+});
+ƒ;
 
 const PORT = 4000;
 app.listen(PORT);
@@ -204,4 +205,52 @@ module.exports = {
     return posts;
   },
 };
+```
+
+## Simple Koa Example with Mongoose
+
+```javascript
+require("dotenv").config();
+
+const Koa = require("koa");
+const Router = require("koa-router");
+const mongoose = require("mongoose");
+const bodyParser = require("koa-bodyparser");
+const postRoutes = require("./api/post/config/routes.js");
+
+const url = process.env.MONGO_DB_URI;
+
+async function start(url) {
+  // database setup
+  try {
+    await mongoose.connect(url);
+
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.log("Error connecting to MongoDB:", error.message);
+    return;
+  }
+
+  // create the koa app
+  const app = new Koa();
+  const router = new Router();
+
+  app.use(bodyParser());
+  app.use(router.routes());
+
+  // set up routes
+  postRoutes.forEach((route) => {
+    return router[route.method](route.route, async (ctx) =>
+      route.controller[route.type](ctx)
+    );
+  });
+
+  // start the server
+
+  const PORT = 4000;
+  app.listen(PORT);
+  console.log(`Server is listening on port ${PORT}`);
+}
+
+start(url);
 ```
