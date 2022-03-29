@@ -7,12 +7,8 @@
         "id": "91b204ffff8c7289",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "StrapiJS/Strapi4/FileUpload/Upload File with Strapi and Cloudinary.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -69,7 +65,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "StrapiJS/Strapi4/FileUpload/Upload File with Strapi and Cloudinary.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,8 +84,7 @@
   },
   "active": "91b204ffff8c7289",
   "lastOpenFiles": [
-    "StrapiJS/Strapi4/FileUpload/Upload File with Strapi and Cloudinary.md",
-    "strapi.io.md",
+    "StrapiJS/Strapi4/Output user info.md",
     "Recent/TeamsFetchHook.md",
     "ReactJS/Use Fetch Hook Example/Use Fetch Hook.md",
     "StrapiJS/Strapi3/Custom Registration Controller.md",
