@@ -15,12 +15,8 @@
         "id": "3f94909dabc0b1ed",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "StrapiJS/Strapi4/Output user info.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -77,7 +73,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "StrapiJS/Strapi4/Output user info.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -95,8 +90,10 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "3f94909dabc0b1ed",
+  "active": "91b204ffff8c7289",
   "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "Google Bucket.md",
     "StrapiJS/Strapi4/Output user info.md",
     "Recent/TeamsFetchHook.md",
     "ReactJS/Use Fetch Hook Example/Use Fetch Hook.md",
