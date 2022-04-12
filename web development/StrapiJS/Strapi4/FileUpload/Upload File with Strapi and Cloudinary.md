@@ -159,7 +159,6 @@ module.exports = (coreApi) => {
         await strapi.service("api::document.document").create({
           data: { ...imageData },
         });
-        
       })
     ).catch((err) => console.log(err, "Failed to create document"));
 

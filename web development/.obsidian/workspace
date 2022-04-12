@@ -7,16 +7,12 @@
         "id": "91b204ffff8c7289",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
-        }
-      },
-      {
-        "id": "3f94909dabc0b1ed",
-        "type": "leaf",
-        "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "StrapiJS/Strapi4/whats the diference.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -73,6 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "StrapiJS/Strapi4/whats the diference.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -92,14 +89,15 @@
   },
   "active": "91b204ffff8c7289",
   "lastOpenFiles": [
+    "StrapiJS/Strapi4/whats the diference.md",
+    "StrapiJS/Strapi4/Output user info.md",
+    "StrapiJS/Strapi4/FileUpload/Upload File with Strapi and Cloudinary.md",
+    "StrapiJS/Strapi3/Bootstrap.js.md",
     "conflict-files-obsidian-git.md",
     "Google Bucket.md",
-    "StrapiJS/Strapi4/Output user info.md",
     "Recent/TeamsFetchHook.md",
     "ReactJS/Use Fetch Hook Example/Use Fetch Hook.md",
     "StrapiJS/Strapi3/Custom Registration Controller.md",
-    "StrapiJS/Strapi3/Import Data.md",
-    "KoaJS/Koa Prisma Setup.md",
-    "KoaJS/Simple Routing Examples.md"
+    "StrapiJS/Strapi3/Import Data.md"
   ]
 }
